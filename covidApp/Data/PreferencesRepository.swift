@@ -13,12 +13,6 @@ protocol PreferencesServiceProtocol {
     func clearLastCountry()
 }
 
-protocol PreferencesServiceProtocol {
-    func getLastCountry() -> String?
-    func setLastCountry(country: String)
-    func clearLastCountry()
-}
-
 class PreferencesRepository: PreferencesServiceProtocol {
     static let shared = PreferencesRepository()
     
