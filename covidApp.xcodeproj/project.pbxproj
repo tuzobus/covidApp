@@ -6,6 +6,12 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		563BF4D12ED8F9FD005F5609 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 563BF4D02ED8F9FD005F5609 /* Alamofire */; };
+		563BF4D42ED8FA09005F5609 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 563BF4D32ED8FA09005F5609 /* SDWebImageSwiftUI */; };
+		563BF4D72ED8FA11005F5609 /* FlowStacks in Frameworks */ = {isa = PBXBuildFile; productRef = 563BF4D62ED8FA11005F5609 /* FlowStacks */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		562206F12ED8F788003588E6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -52,6 +58,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				563BF4D42ED8FA09005F5609 /* SDWebImageSwiftUI in Frameworks */,
+				563BF4D12ED8F9FD005F5609 /* Alamofire in Frameworks */,
+				563BF4D72ED8FA11005F5609 /* FlowStacks in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +121,9 @@
 			);
 			name = covidApp;
 			packageProductDependencies = (
+				563BF4D02ED8F9FD005F5609 /* Alamofire */,
+				563BF4D32ED8FA09005F5609 /* SDWebImageSwiftUI */,
+				563BF4D62ED8FA11005F5609 /* FlowStacks */,
 			);
 			productName = covidApp;
 			productReference = 562206E32ED8F787003588E6 /* covidApp.app */;
@@ -195,6 +207,11 @@
 			);
 			mainGroup = 562206DA2ED8F787003588E6;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				563BF4CF2ED8F9FD005F5609 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				563BF4D22ED8FA09005F5609 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
+				563BF4D52ED8FA11005F5609 /* XCRemoteSwiftPackageReference "FlowStacks" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 562206E42ED8F787003588E6 /* Products */;
 			projectDirPath = "";
@@ -578,6 +595,51 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		563BF4CF2ED8F9FD005F5609 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.10.2;
+			};
+		};
+		563BF4D22ED8FA09005F5609 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.1.4;
+			};
+		};
+		563BF4D52ED8FA11005F5609 /* XCRemoteSwiftPackageReference "FlowStacks" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/johnpatrickmorgan/FlowStacks";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.10.12;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		563BF4D02ED8F9FD005F5609 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 563BF4CF2ED8F9FD005F5609 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		563BF4D32ED8FA09005F5609 /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 563BF4D22ED8FA09005F5609 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
+		};
+		563BF4D62ED8FA11005F5609 /* FlowStacks */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 563BF4D52ED8FA11005F5609 /* XCRemoteSwiftPackageReference "FlowStacks" */;
+			productName = FlowStacks;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 562206DB2ED8F787003588E6 /* Project object */;
 }
