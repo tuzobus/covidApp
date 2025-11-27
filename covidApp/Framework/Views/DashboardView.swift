@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct DashboardView: View {
     @StateObject var viewModel = CovidDashboardViewModel()
@@ -27,7 +28,7 @@ struct DashboardView: View {
                 .padding(.top, 16)
                 
                 HStack {
-                    TextField("Escribe un país (ej. Canada)", text: $viewModel.searchText)
+                    TextField("Escribe un país", text: $viewModel.searchText)
                         .textInputAutocapitalization(.words)
                         .disableAutocorrection(true)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -133,10 +134,27 @@ struct SummaryCard: View {
     let summary: CovidCountrySummary
     let latest: CovidTimelineEntry?
     
+    var flagURL: URL? {
+        if let code = CountryCodeHelper.code(for: summary.country) {
+            return URL(string: "https://flagsapi.com/\(code)/flat/32.png")
+        }
+        return nil
+    }
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text(summary.displayName)
-                .font(.headline)
+            HStack(spacing: 8) {
+                if let url = flagURL {
+                    WebImage(url: url)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 34, height: 26)
+                        .clipShape(RoundedRectangle(cornerRadius: 2))
+                }
+                
+                Text(summary.displayName)
+                    .font(.headline)
+            }
             
             if let latest = latest {
                 VStack(alignment: .leading, spacing: 4) {
@@ -161,7 +179,9 @@ struct SummaryCard: View {
             
             Divider()
             
-            let nonEmptyEntries = summary.timeline.filter {entry in return entry.new > 0}
+            let nonEmptyEntries = summary.timeline.filter { entry in
+                return entry.new > 0
+            }
             let lastEntries = Array(nonEmptyEntries.suffix(7)).reversed()
             
             VStack(alignment: .leading, spacing: 4) {
