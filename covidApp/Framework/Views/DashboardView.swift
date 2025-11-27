@@ -20,14 +20,9 @@ struct DashboardView: View {
         NavigationView {
             VStack(spacing: 16) {
                 VStack(spacing: 4) {
-                    Text("COVID-19 Dashboard")
+                    Text("COVID-19")
                         .font(.title)
                         .fontWeight(.bold)
-                    if !viewModel.currentCountryLabel.isEmpty {
-                        Text("Mostrando datos para: \(viewModel.currentCountryLabel)")
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
-                    }
                 }
                 .padding(.top, 16)
                 
@@ -180,7 +175,7 @@ struct SummaryCard: View {
                             .font(.caption2)
                             .frame(width: 80, alignment: .leading)
                         
-                        Text("C:\(entry.newCases)")
+                        Text("Casos:\(entry.newCases)")
                             .font(.caption2)
                         if let nd = entry.newDeaths {
                             Text(" M:\(nd)")
