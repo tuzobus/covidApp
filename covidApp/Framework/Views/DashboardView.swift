@@ -115,8 +115,11 @@ struct DashboardView: View {
         } else {
             ScrollView {
                 VStack(spacing: 16) {
-                    ForEach(viewModel.summaries, id: \.displayName) { summary in
-                        SummaryCard(summary: summary, latest: viewModel.latestEntry(for: summary))
+                    ForEach(viewModel.summaries) { summary in
+                        SummaryCard(
+                            summary: summary,
+                            latest: viewModel.latestEntry(for: summary)
+                        )
                     }
                 }
                 .padding(.horizontal)
@@ -137,20 +140,16 @@ struct SummaryCard: View {
             
             if let latest = latest {
                 VStack(alignment: .leading, spacing: 4) {
-                    Text("Última fecha: \(latest.dateString)")
+                    Text("Última fecha: \(latest.date)")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
                     
                     HStack {
                         VStack(alignment: .leading, spacing: 2) {
-                            Text("Casos totales: \(latest.totalCases)")
-                            Text("Casos nuevos: \(latest.newCases)")
+                            Text("Casos totales: \(latest.total)")
+                            Text("Casos nuevos: \(latest.new)")
                         }
                         Spacer()
-                        VStack(alignment: .leading, spacing: 2) {
-                            Text("Muertes totales: \(latest.totalDeaths ?? 0)")
-                            Text("Muertes nuevas: \(latest.newDeaths ?? 0)")
-                        }
                     }
                     .font(.caption)
                 }
@@ -169,18 +168,14 @@ struct SummaryCard: View {
                     .font(.caption)
                     .foregroundColor(.secondary)
                 
-                ForEach(lastEntries, id: \.dateString) { entry in
+                ForEach(lastEntries, id: \.id) { entry in
                     HStack {
-                        Text(entry.dateString)
+                        Text(entry.date)
                             .font(.caption2)
-                            .frame(width: 80, alignment: .leading)
+                            .frame(width: 90, alignment: .leading)
                         
-                        Text("Casos:\(entry.newCases)")
+                        Text("Nuevos: \(entry.new)")
                             .font(.caption2)
-                        if let nd = entry.newDeaths {
-                            Text(" M:\(nd)")
-                                .font(.caption2)
-                        }
                         
                         Spacer()
                     }

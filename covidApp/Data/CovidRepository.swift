@@ -7,10 +7,16 @@
 
 import Foundation
 
+struct Api {
+    static let base = "https://api.api-ninjas.com/v1"
+    
+    struct routes {
+        static let covid19 = "/covid19"
+    }
+}
+
 protocol CovidAPIProtocol {
     func getCovidByCountry(country: String) async -> [CovidApiLocation]?
-    
-    func getGlobalSnapshot(date: String) async -> [CovidApiLocation]?
 }
 
 class CovidRepository: CovidAPIProtocol {
@@ -23,10 +29,6 @@ class CovidRepository: CovidAPIProtocol {
     }
     
     func getCovidByCountry(country: String) async -> [CovidApiLocation]? {
-        await nservice.getCovidByCountry(country: country)
-    }
-    
-    func getGlobalSnapshot(date: String) async -> [CovidApiLocation]? {
-        await nservice.getGlobalSnapshot(date: date)
+        await nservice.getCountryData(country: country)
     }
 }

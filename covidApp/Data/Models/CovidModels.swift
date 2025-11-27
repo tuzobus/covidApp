@@ -7,50 +7,31 @@
 
 import Foundation
 
-struct CovidApiLocation: Codable, Identifiable{
-    var id: String {
-        if let region, !region.isEmpty {
-            return "\(country)-\(region)"
-        }
-        return country
-    }
-    
-    let country: String
-    let region: String?
-    
-    let cases : [String: CovidApiDayStats]?
-    
-    let deaths: [String: CovidApiDayStats]?
+struct CovidApiLocation: Codable {
+    var country: String
+    var region: String?
+    var cases: [String: CovidApiDayStats]
 }
 
 struct CovidApiDayStats: Codable {
-    let total: Int
-    let new: Int
+    var total: Int
+    var new: Int
 }
 
 struct CovidTimelineEntry: Identifiable {
-    let id = UUID()
-    
-    let dateString: String
-    
-    let totalCases: Int
-    let newCases: Int
-    
-    let totalDeaths: Int?
-    let newDeaths: Int?
+    var id = UUID()
+    var date: String
+    var total: Int
+    var new: Int
 }
 
 struct CovidCountrySummary: Identifiable {
-    let id = UUID()
+    var id = UUID()
     
-    let displayName: String
+    var displayName: String
     
-    let country: String
-    let region: String?
+    var country: String
+    var region: String?
     
-    let timeline: [CovidTimelineEntry]
-    
-    var latest: CovidTimelineEntry? {
-        return timeline.last
-    }
+    var timeline: [CovidTimelineEntry]
 }

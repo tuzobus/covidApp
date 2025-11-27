@@ -29,7 +29,9 @@ class CovidCountryRequirement: CovidCountryRequirementProtocol {
         let summaries: [CovidCountrySummary] = apiLocations.compactMap { location in
             let timeline = buildTimeline(from: location)
             
-            guard !timeline.isEmpty else { return nil }
+            if timeline.isEmpty {
+                return nil
+            }
             
             let displayName: String
             if let region = location.region, !region.isEmpty {
@@ -50,9 +52,7 @@ class CovidCountryRequirement: CovidCountryRequirementProtocol {
     }
     
     private func buildTimeline(from location: CovidApiLocation) -> [CovidTimelineEntry] {
-        let casesDict = location.cases ?? [:]
-        let deathsDict = location.deaths ?? [:]
-        
+        let casesDict = location.cases
         let sortedDates = casesDict.keys.sorted()
         
         var timeline: [CovidTimelineEntry] = []
@@ -60,14 +60,14 @@ class CovidCountryRequirement: CovidCountryRequirementProtocol {
         for date in sortedDates {
             guard let caseStats = casesDict[date] else { continue }
             
-            let deathsStats = deathsDict[date]
+            if caseStats.total == 0 && caseStats.new == 0 {
+                continue
+            }
             
             let entry = CovidTimelineEntry(
-                dateString: date,
-                totalCases: caseStats.total,
-                newCases: caseStats.new,
-                totalDeaths: deathsStats?.total,
-                newDeaths: deathsStats?.new
+                date: date,
+                total: caseStats.total,
+                new: caseStats.new
             )
             
             timeline.append(entry)

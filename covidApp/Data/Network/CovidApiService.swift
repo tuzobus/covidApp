@@ -8,87 +8,47 @@
 import Foundation
 import Alamofire
 
-struct Api {
-    static let base = "https://api.api-ninjas.com/v1"
-    
-    struct routes {
-        static let covid19 = "/covid19"
-    }
-}
-
 class NetworkAPIService {
     static let shared = NetworkAPIService()
     
+    private let baseUrl = "https://api.api-ninjas.com/v1/covid19"
     private let apiKey = "KxiR7qTolLMO+mYMatZXPQ==hGByBoS6CBRuaEve"
     
-    func getCovidByCountry(country: String) async -> [CovidApiLocation]? {
-        guard let url = URL(string: "\(Api.base)\(Api.routes.covid19)") else {
-            return nil
-        }
-        
+    func getCountryData(country: String) async -> [CovidApiLocation]? {
         let parameters: Parameters = [
-            "country": country
+            "country": country,
+            "type": "cases"
         ]
         
         let headers: HTTPHeaders = [
             "X-Api-Key": apiKey
         ]
         
-        let taskRequest = AF.request(
+        guard let url = URL(string: baseUrl) else {
+            return nil
+        }
+        
+        let request = AF.request(
             url,
             method: .get,
             parameters: parameters,
             headers: headers
-        ).validate()
+        )
+        .validate()
         
-        let response = await taskRequest.serializingData().response
-        
-        switch response.result {
-        case .success(let data):
-            do {
-                return try JSONDecoder().decode([CovidApiLocation].self, from: data)
-            } catch {
-                debugPrint("Decoding error:", error.localizedDescription)
-                return nil
-            }
-        case .failure(let error):
-            debugPrint("Request error:", error.localizedDescription)
-            return nil
-        }
-    }
-    
-    func getGlobalSnapshot(date: String) async -> [CovidApiLocation]? {
-        guard let url = URL(string: "\(Api.base)\(Api.routes.covid19)") else {
-            return nil
-        }
-        
-        let parameters: Parameters = [
-            "date": date
-        ]
-        
-        let headers: HTTPHeaders = [
-            "X-Api-Key": apiKey
-        ]
-        
-        let taskRequest = AF.request(
-            url,
-            method: .get,
-            parameters: parameters,
-            headers: headers
-        ).validate()
-        
-        let response = await taskRequest.serializingData().response
+        let response = await request.serializingData().response
         
         switch response.result {
         case .success(let data):
             do {
-                return try JSONDecoder().decode([CovidApiLocation].self, from: data)
+                let decoded = try JSONDecoder().decode([CovidApiLocation].self, from: data)
+                return decoded
             } catch {
-                debugPrint("Decoding error (snapshot):", error.localizedDescription)
+                print("Decode error: \(error)")
                 return nil
             }
         case .failure(let error):
-            debugPrint("Request error (snapshot):", error.localizedDescription)
+            print("Request error: \(error)")
             return nil
         }
     }
