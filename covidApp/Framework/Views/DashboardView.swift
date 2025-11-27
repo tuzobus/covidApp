@@ -161,7 +161,8 @@ struct SummaryCard: View {
             
             Divider()
             
-            let lastEntries = Array(summary.timeline.suffix(7)).reversed()
+            let nonEmptyEntries = summary.timeline.filter {entry in return entry.new > 0}
+            let lastEntries = Array(nonEmptyEntries.suffix(7)).reversed()
             
             VStack(alignment: .leading, spacing: 4) {
                 Text("Últimos días:")
