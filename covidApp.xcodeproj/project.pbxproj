@@ -33,6 +33,7 @@
 		562206E32ED8F787003588E6 /* covidApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = covidApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		562206F02ED8F788003588E6 /* covidAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = covidAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		562206FA2ED8F788003588E6 /* covidAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = covidAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		564404FB2ED910480019A0B8 /* covidApp.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = covidApp.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -98,6 +99,11 @@
 				562206F02ED8F788003588E6 /* covidAppTests.xctest */,
 				562206FA2ED8F788003588E6 /* covidAppUITests.xctest */,
 			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		564404FD2ED910480019A0B8 /* Products */ = {
+			isa = PBXGroup;
 			name = Products;
 			sourceTree = "<group>";
 		};
@@ -215,6 +221,12 @@
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 562206E42ED8F787003588E6 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 564404FD2ED910480019A0B8 /* Products */;
+					ProjectRef = 564404FB2ED910480019A0B8 /* covidApp.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				562206E22ED8F787003588E6 /* covidApp */,
